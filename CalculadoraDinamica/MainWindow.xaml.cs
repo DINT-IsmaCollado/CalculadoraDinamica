@@ -23,6 +23,45 @@ namespace CalculadoraDinamica
         public MainWindow()
         {
             InitializeComponent();
+            // Creacion de variables
+            Button boton;
+            Viewbox vb;
+            TextBlock tb;
+            int contadorTag = 1;
+            for (int contadorFila = 2; contadorFila <= 4; contadorFila++)
+            {
+                for (int contadorColumna = 0; contadorColumna < 3; contadorColumna++)
+                {
+                    //Definimos variables
+                    boton = new Button();
+                    vb = new Viewbox();
+                    tb = new TextBlock();
+
+
+                    //Creamos el orden de hijos/padres
+                    GridVentana.Children.Add(boton);
+                    boton.Content = vb;
+                    vb.Child = tb;
+
+
+
+                    //Agregamos propiedades
+                    tb.Text = contadorTag.ToString();
+                    boton.Tag = contadorTag;
+                    Grid.SetColumn(boton, contadorColumna);
+                    Grid.SetRow(boton, contadorFila);
+                    boton.Margin = new Thickness(2);
+                    contadorTag++;
+                    boton.Click += Button_Click;
+                }
+                
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Button boton = sender as Button;
+            TextBlockNumeros.Text += boton.Tag;
         }
     }
 }
